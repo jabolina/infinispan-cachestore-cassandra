@@ -51,9 +51,7 @@ jobs:
 
       - name: Next Version
         run: |
-          mvn -B versions:update-parent "-DparentVersion=[${{ github.event.inputs.developmentVersion }}]" -DprocessAllModules=true
-          mvn -B versions:set -DnewVersion=${{ github.event.inputs.developmentVersion }} -DprocessAllModules=true
-          mvn -B versions:commit
+          sed -i 's/<version>${{ github.event.inputs.releaseVersion }}<\/version>/<version>${{ github.event.inputs.developmentVersion }}<\/version>/g' pom.xml
           git commit -a -m "Next version ${{ github.event.inputs.nextVersion }}"
 
       - name: Push changes
