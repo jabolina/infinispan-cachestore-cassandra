@@ -66,5 +66,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.event.inputs.version }}
-          release_name: ${{ github.event.inputs.version }}
+          tag_name: ${{ github.event.inputs.releaseVersion }}
+          release_name: ${{ github.event.inputs.releaseVersion }}
