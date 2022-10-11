@@ -9,7 +9,7 @@
    </parent>
    <artifactId>infinispan-cachestore-cassandra</artifactId>
    <name>Infinispan Cachestore Cassandra</name>
-   <version>13.0.10.Final</version>
+   <version>13.0.11-SNAPSHOT</version>
    <packaging>jar</packaging>
 
    <organization>
