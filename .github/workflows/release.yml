@@ -7,6 +7,10 @@ on:
         description: "The Cassandra cachestore branch to checkout when cutting the release."
         required: true
         default: "main"
+      currentVersion:
+        description: "Current development version to check against."
+        required: true
+        default: "X.Y.Z-SNAPSHOT"
       releaseVersion:
         description: "Release version."
         required: true
@@ -27,10 +31,7 @@ jobs:
           ref: ${{ github.event.inputs.branch }}
 
       - name: Set release version
-        run: |
-          mvn -B versions:update-parent "-DparentVersion=[${{ github.event.inputs.releaseVersion }}]" -DprocessAllModules=true
-          mvn -B versions:set -DnewVersion=${{ github.event.inputs.releaseVersion }} -DprocessAllModules=true
-          mvn -B versions:commit
+        run: sed -i 's/<version>${{ github.event.inputs.currentVersion }}<\/version>/<version>${{ github.event.inputs.releaseVersion }}<\/version>/g' pom.xml
 
       - name: Set up Java for publishing to OSSRH
         uses: actions/setup-java@v3
